@@ -771,6 +771,9 @@ public class LevelGen {
                     if (map.getTile(x, y) == Tiles.get("Lava Stone Bricks")) {
                         pixels[i] = 0xffff2020;
                     }
+                    if (map.getTile(x, y) == Tiles.get("Ashed Dirt")) {
+                        pixels[i] = 0xffa500;
+                    }
                     // if(map.getTileNoise(x, y) == null)
                     // map.setChunkNoise(x / ChunkManager.CHUNK_SIZE, y / ChunkManager.CHUNK_SIZE, new LevelNoise(LevelGen.worldSeed, x, y, 0, 64, 64));
                     // pixels[i] = (int)Math.max(Math.min(map.getTileNoise(x, y).getHeight(x, y)*127+128, 255), 0);
