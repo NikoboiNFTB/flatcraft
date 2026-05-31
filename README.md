@@ -14,3 +14,11 @@ Run:
 ```
 flatpak-builder --user --install --force-clean build-dir dev.nikoboi.flatcraft-plus-revived.yaml
 ```
+
+## Launch
+
+Run:
+
+```
+flatpak run dev.nikoboi.flatcraft-plus-revived
+```

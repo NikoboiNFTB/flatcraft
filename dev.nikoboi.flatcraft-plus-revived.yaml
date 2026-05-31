@@ -2,34 +2,36 @@ app-id: dev.nikoboi.flatcraft-plus-revived
 runtime: org.freedesktop.Platform
 runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
-# This ensures the extension is available for building
 sdk-extensions:
     - org.freedesktop.Sdk.Extension.openjdk8
 
-extensions:
-    com.flatpak.Extension.openjdk8:
-        directory: lib/sdk/openjdk8
-        add-ld-path: lib
-        no-autodownload: false
-        version: "23.08"
+command: flatcraft-plus
 
 build-options:
     build-args:
         - --share=network
-    # This sets the environment variables so the app can find 'java'
     env:
-        PATH: /app/bin:/usr/bin:/lib/sdk/openjdk8/bin
-        JAVA_HOME: /lib/sdk/openjdk8
+        # Point these to the location where we will install Java in the next step
+        JAVA_HOME: /app/jre
+        PATH: /app/bin:/usr/bin:/app/jre/bin
 
-command: flatcraft-plus
 finish-args:
     - --share=ipc
     - --socket=x11
     - --socket=pulseaudio
     - --device=all
     - --share=network
+    # Ensure the app sees the Java path when running
+    - --env=PATH=/app/bin:/usr/bin:/app/jre/bin
+    - --env=JAVA_HOME=/app/jre
 
 modules:
+    - name: openjdk
+      buildsystem: simple
+      build-commands:
+          # This script is provided by the extension to bundle the JRE into /app/jre
+          - /usr/lib/sdk/openjdk8/install.sh
+
     - name: flatcraft
       buildsystem: simple
       build-commands:
