@@ -2,13 +2,24 @@ app-id: dev.nikoboi.flatcraft-plus-revived
 runtime: org.freedesktop.Platform
 runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
+# This ensures the extension is available for building
 sdk-extensions:
     - org.freedesktop.Sdk.Extension.openjdk8
 
-# This is the missing piece for the BUILD phase
+extensions:
+    com.flatpak.Extension.openjdk8:
+        directory: lib/sdk/openjdk8
+        add-ld-path: lib
+        no-autodownload: false
+        version: "23.08"
+
 build-options:
     build-args:
         - --share=network
+    # This sets the environment variables so the app can find 'java'
+    env:
+        PATH: /app/bin:/usr/bin:/lib/sdk/openjdk8/bin
+        JAVA_HOME: /lib/sdk/openjdk8
 
 command: flatcraft-plus
 finish-args:

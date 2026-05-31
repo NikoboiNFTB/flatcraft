@@ -5,4 +5,5 @@ Name=Flatcraft+
 Comment=Minicraft Plus Revived Flatpak Edition
 Exec=flatcraft-plus
 Icon=dev.nikoboi.flatcraft-plus-revived
+Terminal=false
 Categories=Game;
