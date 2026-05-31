@@ -21,9 +21,8 @@ finish-args:
     - --socket=pulseaudio
     - --device=all
     - --share=network
-    # Ensure the app sees the Java path when running
-    - --env=PATH=/app/bin:/usr/bin:/app/jre/bin
-    - --env=JAVA_HOME=/app/jre
+    # THIS LINE FIXES THE SAVES:
+    - --persist=.playminicraft
 
 modules:
     - name: openjdk
