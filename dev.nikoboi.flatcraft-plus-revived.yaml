@@ -4,6 +4,12 @@ runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
 sdk-extensions:
     - org.freedesktop.Sdk.Extension.openjdk8
+
+# This is the missing piece for the BUILD phase
+build-options:
+    build-args:
+        - --share=network
+
 command: flatcraft-plus
 finish-args:
     - --share=ipc
@@ -17,7 +23,6 @@ modules:
       buildsystem: simple
       build-commands:
           - . /usr/lib/sdk/openjdk8/enable.sh && ./gradlew jar
-
           - mkdir -p /app/bin /app/share/flatcraft
           - install -D build/libs/minicraft-plus-2.3.0-infdev3.jar /app/share/flatcraft/minicraft-plus.jar
           - install -D flatcraft.sh /app/bin/flatcraft-plus
