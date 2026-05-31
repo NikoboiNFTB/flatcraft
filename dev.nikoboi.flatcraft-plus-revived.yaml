@@ -16,15 +16,17 @@ modules:
     - name: flatcraft
       buildsystem: simple
       build-commands:
-          # Build the JAR using the wrapper
+          # 1. Enable the OpenJDK 8 environment (This sets JAVA_HOME and PATH)
+          - . /usr/lib/sdk/openjdk8/enable.sh
+
+          # 2. Now run the build
           - ./gradlew jar
+
+          # 3. Create directories and install files
           - mkdir -p /app/bin /app/share/flatcraft
-          # Use the specific version defined in your build.gradle
           - install -D build/libs/minicraft-plus-2.3.0-infdev3.jar /app/share/flatcraft/minicraft-plus.jar
           - install -D flatcraft.sh /app/bin/flatcraft-plus
-          # Install the Desktop file
           - install -D dev.nikoboi.flatcraft-plus-revived.desktop /app/share/applications/dev.nikoboi.flatcraft-plus-revived.desktop
-          # Install the Icon
           - install -D dev.nikoboi.flatcraft-plus-revived.png /app/share/icons/hicolor/256x256/apps/dev.nikoboi.flatcraft-plus-revived.png
       sources:
           - type: dir
