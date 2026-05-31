@@ -1,0 +1,31 @@
+app-id: dev.nikoboi.flatcraft-plus-revived
+runtime: org.freedesktop.Platform
+runtime-version: "23.08"
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+    - org.freedesktop.Sdk.Extension.openjdk8
+command: flatcraft-plus
+finish-args:
+    - --share=ipc
+    - --socket=x11
+    - --socket=pulseaudio
+    - --device=all
+    - --share=network
+
+modules:
+    - name: flatcraft
+      buildsystem: simple
+      build-commands:
+          # Build the JAR using the wrapper
+          - ./gradlew jar
+          - mkdir -p /app/bin /app/share/flatcraft
+          # Use the specific version defined in your build.gradle
+          - install -D build/libs/minicraft-plus-2.3.0-infdev3.jar /app/share/flatcraft/minicraft-plus.jar
+          - install -D flatcraft.sh /app/bin/flatcraft-plus
+          # Install the Desktop file
+          - install -D dev.nikoboi.flatcraft-plus-revived.desktop /app/share/applications/dev.nikoboi.flatcraft-plus-revived.desktop
+          # Install the Icon
+          - install -D dev.nikoboi.flatcraft-plus-revived.png /app/share/icons/hicolor/256x256/apps/dev.nikoboi.flatcraft-plus-revived.png
+      sources:
+          - type: dir
+            path: .
