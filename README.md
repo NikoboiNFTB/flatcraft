@@ -22,3 +22,35 @@ Run:
 ```
 flatpak run dev.nikoboi.flatcraft-plus-revived
 ```
+
+## Bundle
+
+Run:
+
+```
+flatpak build-bundle repo flatcraft-plus.flatpak dev.nikoboi.flatcraft-plus-revived
+```
+
+### Fixes?
+
+```
+flatpak-builder --export-only --repo=repo_tmp dev.nikoboi.flatcraft-plus-revived.yaml
+```
+
+```
+flatpak build-bundle repo_tmp flatcraft-plus.flatpak dev.nikoboi.flatcraft-plus-revived
+```
+
+### Fixes
+
+```
+flatpak-builder --export-only --repo=repo build-dir dev.nikoboi.flatcraft-plus-revived.yaml
+```
+
+```
+flatpak build-bundle repo flatcraft-plus.flatpak dev.nikoboi.flatcraft-plus-revived
+```
+
+```
+flatpak install --user flatcraft-plus.flatpak
+```
