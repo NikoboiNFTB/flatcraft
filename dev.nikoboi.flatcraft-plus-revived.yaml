@@ -16,13 +16,8 @@ modules:
     - name: flatcraft
       buildsystem: simple
       build-commands:
-          # 1. Enable the OpenJDK 8 environment (This sets JAVA_HOME and PATH)
-          - . /usr/lib/sdk/openjdk8/enable.sh
+          - . /usr/lib/sdk/openjdk8/enable.sh && ./gradlew jar
 
-          # 2. Now run the build
-          - ./gradlew jar
-
-          # 3. Create directories and install files
           - mkdir -p /app/bin /app/share/flatcraft
           - install -D build/libs/minicraft-plus-2.3.0-infdev3.jar /app/share/flatcraft/minicraft-plus.jar
           - install -D flatcraft.sh /app/bin/flatcraft-plus
